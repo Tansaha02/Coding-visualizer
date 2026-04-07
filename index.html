@@ -1,118 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial scale=1.0"/>
-        <title>Codeviz- Multi-langauge coding visualizer</title>
-        <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
-        <body>
-            <nav>
-                <div class="logo">Code<span>Viz</span></div>
-                <div class="nav-links">
-                    <a href="index.html" class="active">Home</a>
-                    <a href="variables.html">variables</a>
-                    <a href="loops.html">Loops</a>
-                    <a href="functions.html">Functions</a>
-                </div>
-            </nav>
-        <div class="hero">
-        <h1>
-            Learn Code<span class="line2">by Seeing It</span>
-        </h1>
-        <p class="hero-decs">CodeViz is an interactive visualizer that makes programming concepts click-with live editors,
-            step-by-step animations, and side-by-side language comparisons.
-        </p>
-        <div class="stats">
-      <div class="stat-item">
-        <span class="stat-num">8</span>
-        <span class="stat-label">Chapters</span>
-      </div>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CodeViz — Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="dot-bg">
+<div id="nav"></div>
+<div class="page page-z">
+
+  <div style="margin-bottom:3.5rem">
+    <div style="font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem">— 1st Year Project &nbsp;·&nbsp; HTML · CSS · JS</div>
+    <h1>Learn Code<br><em>by Seeing It.</em></h1>
+    <p class="subtitle" style="margin-bottom:2rem">CodeViz is an interactive visualizer that makes programming concepts click — with live editors, step-by-step animations, and cross-language comparisons.</p>
+    <div class="stats">
+      <div class="stat-item"><span class="stat-num">8</span><span class="stat-label">Chapters</span></div>
       <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-num">4</span>
-        <span class="stat-label">Languages</span>
-      </div>
+      <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Languages</span></div>
       <div class="stat-divider"></div>
-      <div class="stat-item">
-        <span class="stat-num">∞</span>
-        <span class="stat-label">Live Demos</span>
-      </div>
+      <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">Live Demos</span></div>
     </div>
-    <div class="section-label">All Chanpters</div>
-        <div class="chapter-grid" id="chapter-grid"></div>
+  </div>
 
-        <div class="lang-section">
-            <div class="section-label">Languages Covered</div>
-            <div class="lamg-row">
-                <div class="lang-card">
-                    <div class="lang-icon" style="background: rgba(249, 199,79,0.12); color: var(--yellow);">JS</div>
-                    <div class="lang-info">
-                        <div class="lang-name">Javascript</div>
-                        <div class="lang-role">Primary language</div>
-                    </div>
-                </div>
-                <div class="lang-card">
-                    <div class="lang-icon" style="background: rgba(128, 180,249,0.12); color: var(-blue);">PY</div>
-                    <div class="lang-info">
-                        <div class="lang-name">Python</div>
-                        <div class="lang-role">Syntax Comparison</div>
-                    </div>
-                </div>
-                <div class="lang-card">
-                    <div class="lang-icon" style="background: rgba(240, 113,103,0.12); color: var(--red);">JV</div>
-                    <div class="lang-info">
-                        <div class="lang-name">Java</div>
-                        <div class="lang-role">Syntax Comparison</div>
-                    </div>
-                </div>
-                <div class="lang-card">
-                    <div class="lang-icon" style="background: rgba(125, 199,170,0.12); color: var(--accent);">TS</div>
-                    <div class="lang-info">
-                        <div class="lang-name">Typescript</div>
-                        <div class="lang-role">Syntax Comparison</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="section-label">All Chapters</div>
+  <div class="chapter-grid" id="chapter-grid"></div>
+  <div class="section">
+    <div class="section-level">Languages Covered</div>
+    <div class="lang-row">
+      <div class="lang-card"><div class="lang-icon" style="background: rgba(249,199,79,0.12);color: var(--yellow);">JS</div><div><div class="lang-name">Javascript</div><div class="lang-role">Primary Language</div></div></div>
+      <div class="lang-card"><div class="lang-icon" style="background: rgba(128,180,249,0.12);color: var(--blue);">PY</div><div><div class="lang-name">Python</div><div class="lang-role">Syntax Comparision</div></div></div>
+      <div class="lang-card"><div class="lang-icon" style="background: rgba(240,113,103,0.12);color: var(--red);">JV</div><div><div class="lang-name">Java</div><div class="lang-role">Syntax Comparision</div></div></div>
+      <div class="lang-card"><div class="lang-icon" style="background: rgba(125,249,170,0.12);color: var(--accent);">TS</div><div><div class="lang-name">Typescript</div><div class="lang-role">Syntax Comparision</div></div></div>
+    </div>
+  </div>
+  
+  <div class="Section">
+    <div class="section-label">How to Use</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Pick A chapter</strong><span>Start from variables or jump to any topic</span></div></div>
+       <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Pick A chapter</strong><span>Start from variables or jump to any topic</span></div></div>
+        <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Pick A chapter</strong><span>Start from variables or jump to any topic</span></div></div>
+         <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Pick A chapter</strong><span>Start from variables or jump to any topic</span></div></div>
+    </div>
+  </div>
+  <div id="footer"></div>
 
+  
+<script src="components.js"></script>
+<script>
+const chapters = [
+  { num:"01", title:"Variables & Data Types", desc:"How JS stores data — let, const, var, strings, numbers, booleans.", href:"variables.html", accent:"#7df9aa", ready:true,  langs:["JS","PY","JV","TS"] },
+  { num:"02", title:"Loops & Iteration",      desc:"Repeat code automatically with for, while, and for...of.",          href:"loops.html",     accent:"#f9c74f", ready:true,  langs:["JS","PY","JV"] },
+  { num:"03", title:"Functions & Scope",      desc:"Write reusable blocks of code. Understand local vs global scope.",  href:"functions.html", accent:"#80b4f9", ready:true,  langs:["JS","PY"] },
+  { num:"04", title:"DOM Manipulation",       desc:"Use JS to select, change, and create elements on a webpage.",       href:"dom.html",       accent:"#f07167", ready:true,  langs:["JS"] },
+  { num:"05", title:"Events & Listeners",     desc:"Make pages interactive — clicks, keypresses, form inputs.",         href:"events.html",    accent:"#a78bfa", ready:true,  langs:["JS"] },
+  { num:"06", title:"Objects & Arrays",       desc:"Group related data. Loop through lists. Understand references.",    href:"objects.html",   accent:"#7df9aa", ready:true,  langs:["JS","PY","JV"] },
+  { num:"07", title:"Form Validation",        desc:"Check user input before submission using JS validation logic.",      href:"forms.html",     accent:"#f9c74f", ready:true,  langs:["JS"] },
+  { num:"08", title:"Fetch API & JSON",       desc:"Request data from the web. Read and display JSON responses.",       href:"api.html",       accent:"#80b4f9", ready:true,  langs:["JS","PY"] },
+];
 
-        <div class="how-section">
-            <div class="section label">How To Use</div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-num">01</div>
-                    <div class="step-text">
-                        <strong>Pick a Chapter</strong>
-                        <span>Start from variables and work your way down - or jump to any topic</span>
-                    </div>
-                </div>
-                 <div class="step">
-                    <div class="step-num">02</div>
-                    <div class="step-text">
-                        <strong>Read the Concept Cards</strong>
-                        <span>Each page starts witha simple explanatin before showing any code</span>
-                    </div>
-                </div>
-                 <div class="step">
-                    <div class="step-num">03</div>
-                    <div class="step-text">
-                        <strong>Try the live Editor</strong>
-                        <span>Edit the code and press --Run --see output and memory changes instantly</span>
-                    </div>
-                </div>
-                 <div class="step">
-                    <div class="step-num">04</div>
-                    <div class="step-text">
-                        <strong>Test yourself with a small quize</strong>
-                        <span>Every chapter ends with a quick quize to confirm you got it</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-
-        
-        </body>
-
-    </head>
+</script>
+</body>
 </html>

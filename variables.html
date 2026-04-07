@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Variables - CodeViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div id="nav"></div>
+    <div class="page">
+        <div class="tag">Chapter 01</div>
+        <h1>Variables &amp; <em>Data types</em></h1>
+        <p class="subtitle">Understand How javascript stores data, the difference between var/let/const, and how types work</p>
+
+
+        <div class="section">
+            <div class="section-label">01 - pick a Concept</div>
+            <div class="concept-grid" id="concept-cards"></div>
+
+            <div class="section">
+                <div class="section-label">02 -Live Code Editor</div>
+                <div class="card">
+                    <div class="card-head">
+                        <div class="dots"><span class="d-r"><span class="d-y"></span><span class="d-g"></span></div>
+                        <div>script.js</div>
+                        <div style="color:var(--muted); font-size: 7 rem;">Javascript</div>
+                    </div>
+                    <div class="editor-wrap">
+                        <div class="editor-pane">
+                            <textarea id="code-editor" spellcheck="false">let name = "Alice";
+let age = 20;
+let isstudent = true;
+let score;
+console.log(name);
+console.log(age);
+console.log(isStudent);
+console.log(score);
+console.log(typeof name);
+console.log(type of age);
+
+
+                            </textarea>
+                        </div>
+                        <div class="output-pane">
+                            <div class="output-label">> Output</div>
+                            <div id="output-display" style="min-height:160px"><span style="color: var(--muted); font-family: var(--mono);font-size: 8 rem;">Press Run...</span></div>
+                        </div>
+                    </div>
+                    <div style="padding:0.75rem 1.2rem 1.2rem">
+                        <button class="btn btn-green" onclick="runCode()">>Run Code</button>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-label">03-Memory Visualizer</div>
+                <div class="card">
+                    <div class="card-head">
+                        <div class="dots"><span class="d-r"><span class="d-y"></span><span class="d-g"></span></div>
+                        <div>Variables stack</div>
+                        <button class="btn btn-outline" onclick="runCode()" style="padding: 0.2 rem 0.6 rem; font-size: 0.7rem;">Refresh</button>
+                    </div>
+                    <div class="memory-grid" id="memory-grid">
+                        <span style="color: var(--muted); font-family: var(--mono); font-size: 0.8rem; padding: 0.5rem;">Run code to see variables</span>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script src="components.js"></script>
+</body>
+</html>
