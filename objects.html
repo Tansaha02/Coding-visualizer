@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Objects & Arrays — CodeViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+
+  <div class="tag">Chapter 06</div>
+  <h1>Objects &amp; <em>Arrays</em></h1>
+  <p class="subtitle">Group related data together. Objects use named keys. Arrays use numbered indexes.</p>
+
+  <div class="section">
+    <div class="section-label">01 — Objects vs Arrays</div>
+    <div class="tabs" id="oa-tabs">
+      <div class="tab active" data-t="obj">Object</div>
+      <div class="tab" data-t="arr">Array</div>
+      <div class="tab" data-t="nested">Nested</div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div id="oa-title">Object</div><div style="color:var(--muted);font-size:.7rem">JavaScript</div></div>
+      <div class="two-col">
+        <div id="oa-code" class="code-block" style="border-right:1px solid var(--border)"></div>
+        <div id="oa-explain" class="explain"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">02 — Build an Object</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>Interactive Object Builder</div></div>
+      <div class="builder">
+        <div class="input-row">
+          <input class="demo-input" id="obj-key" placeholder="key (e.g. name)"/>
+          <input class="demo-input" id="obj-val" placeholder="value (e.g. Alice)"/>
+          <button class="btn btn-green" onclick="addProp()">Add</button>
+          <button class="btn btn-outline" onclick="clearObj()">Clear</button>
+        </div>
+        <div class="obj-display" id="obj-display">{ <span style="color:var(--muted)">// object will appear here</span> }</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">03 — Array Methods</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>Live Array — try the methods</div></div>
+      <div class="array-viz">
+        <div class="array-row" id="array-row"></div>
+        <div class="array-method-row">
+          <button class="btn btn-outline" onclick="doMethod('push')">push("new")</button>
+          <button class="btn btn-outline" onclick="doMethod('pop')">pop()</button>
+          <button class="btn btn-outline" onclick="doMethod('length')">length</button>
+          <button class="btn btn-outline" onclick="doMethod('reverse')">reverse()</button>
+          <button class="btn btn-outline" onclick="doMethod('reset')">↺ Reset</button>
+        </div>
+        <div class="method-result" id="method-result">Click a method to see the result…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">04 — Quick Quiz</div>
+    <div class="card">
+      <div class="card-head"><div>Test Yourself</div><div class="score-display" id="score-display">0 / 4</div></div>
+      <div class="quiz-pad" id="quiz-area"></div>
+    </div>
+  </div>
+
+</div>
+<div id="footer"></div>
+<script src="components.js"></script>
+<script>
+const oaData = {
+  obj:{ title:"Object", code:`<span class="kw">const</span> student = {\n  name: <span class="str">"Alice"</span>,\n  age:  <span class="num">20</span>,\n  pass: <span class="kw">true</span>\n};\nconsole.log(student.name);  <span class="cmt">// "Alice"</span>\nconsole.log(student[<span class="str">"age"</span>]); <span class="cmt">// 20</span>`, explain:`<strong style="color:var(--text)">Object</strong><br><br>Stores <b style="color:var(--accent)">key: value</b> pairs.<br><br>Keys are strings. Values can be anything.<br><br>Access with dot notation or bracket notation.<br><br>Best for: one thing with multiple properties.` },
+  arr:{ title:"Array", code:`<span class="kw">const</span> scores = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">96</span>];\n\nconsole.log(scores[<span class="num">0</span>]); <span class="cmt">// 85 (first item)</span>\nconsole.log(scores[<span class="num">2</span>]); <span class="cmt">// 78</span>\n\n<span class="kw">for</span> (<span class="kw">const</span> s <span class="kw">of</span> scores) {\n  console.log(s);\n}`, explain:`<strong style="color:var(--text)">Array</strong><br><br>Stores an ordered <b style="color:var(--accent)">list</b> of items.<br><br>Index starts at <b style="color:var(--yellow)">0</b>.<br><br>Best for: lists of things (scores, names, items).` },
+  nested:{ title:"Nested Object + Array", code:`<span class="kw">const</span> classroom = {\n  teacher: <span class="str">"Mr. Roy"</span>,\n  students: [<span class="str">"Alice"</span>, <span class="str">"Bob"</span>],\n  room: <span class="num">204</span>\n};\n\nconsole.log(classroom.teacher);      <span class="cmt">// "Mr. Roy"</span>\nconsole.log(classroom.students[<span class="num">0</span>]); <span class="cmt">// "Alice"</span>`, explain:`<strong style="color:var(--text)">Nested Structures</strong><br><br>Objects can contain arrays. Arrays can contain objects.<br><br>Chain dots to go deeper:<br><code style="font-family:var(--mono);color:var(--yellow)">obj.arr[0]</code>` },
+};
+document.querySelectorAll("#oa-tabs .tab").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    document.querySelectorAll("#oa-tabs .tab").forEach(t=>t.classList.remove("active")); tab.classList.add("active");
+    const d=oaData[tab.dataset.t]; document.getElementById("oa-title").textContent=d.title; document.getElementById("oa-code").innerHTML=d.code; document.getElementById("oa-explain").innerHTML=d.explain;
+  });
+});
+document.getElementById("oa-code").innerHTML=oaData.obj.code;
+document.getElementById("oa-explain").innerHTML=oaData.obj.explain;
+
+let obj={};
+function renderObj(){ const keys=Object.keys(obj); if(!keys.length){document.getElementById("obj-display").innerHTML=`{ <span style="color:var(--muted)">// object will appear here</span> }`;return;} document.getElementById("obj-display").innerHTML=`{\n${keys.map(k=>`  <span class="obj-key">${k}</span>: ${!isNaN(obj[k])&&obj[k]!==''?`<span class="obj-num">${obj[k]}</span>`:`<span class="obj-str">"${obj[k]}"</span>`}`).join(",\n")}\n}`; }
+function addProp(){ const k=document.getElementById("obj-key").value.trim(),v=document.getElementById("obj-val").value.trim(); if(!k||!v)return; obj[k]=v; document.getElementById("obj-key").value=""; document.getElementById("obj-val").value=""; renderObj(); }
+function clearObj(){ obj={}; renderObj(); }
+
+let arr=["apple","banana","mango","grape"];
+function renderArr(){ document.getElementById("array-row").innerHTML=arr.map((v,i)=>`<div class="array-cell"><div class="array-val">${v}</div><div class="array-idx">[${i}]</div></div>`).join(""); }
+function doMethod(m){ const r=document.getElementById("method-result"); if(m==='push'){arr.push("new");r.textContent=`push("new") → ${arr.length} items`;}else if(m==='pop'){const x=arr.pop();r.textContent=`pop() removed "${x}" → ${arr.length} left`;}else if(m==='length'){r.textContent=`length → ${arr.length}`;}else if(m==='reverse'){arr.reverse();r.textContent="reverse() → array flipped";}else{arr=["apple","banana","mango","grape"];r.textContent="Array reset";} renderArr(); }
+renderArr();
+
+const questions=[
+  {q:`How do you access the <code>name</code> property of an object <code>user</code>?`, opts:["user[name]","user->name","user.name","user::name"], ans:2, exp:"Dot notation (user.name) is the most common way."},
+  {q:`What index is the FIRST item in an array?`, opts:["1","0","-1","Depends"], ans:1, exp:"Arrays start at index 0 in JavaScript (and most languages)."},
+  {q:`Which method adds an item to the END of an array?`, opts:["add()","append()","push()","insert()"], ans:2, exp:"push() adds items to the end and returns the new length."},
+  {q:`What is <code>typeof []</code> in JavaScript?`, opts:['"array"','"list"','"object"','"undefined"'], ans:2, exp:'typeof [] returns "object". Use Array.isArray() to check for arrays specifically.'},
+];
+let qi=0,qs=0;
+function renderQuiz(){if(qi>=questions.length){document.getElementById("quiz-area").innerHTML=`<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎉</div><div style="font-weight:700;margin:.5rem 0">Score: ${qs} / ${questions.length}</div><button class="next-btn show" onclick="qi=0;qs=0;renderQuiz()">Try Again</button></div>`;return;}const q=questions[qi];document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("quiz-area").innerHTML=`<div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<div class="option" onclick="pick(${i})">${o}</div>`).join("")}</div><div class="feedback" id="fb"></div><button class="next-btn" id="nxt" onclick="qi++;renderQuiz()">Next →</button>`;}
+function pick(i){const q=questions[qi];document.querySelectorAll(".option").forEach((el,j)=>{el.classList.add("off");if(j===q.ans)el.classList.add("correct");if(j===i&&i!==q.ans)el.classList.add("wrong");});const fb=document.getElementById("fb");if(i===q.ans){qs++;fb.className="feedback show ok";fb.textContent="✓ "+q.exp;}else{fb.className="feedback show no";fb.textContent="✗ "+q.exp;}document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("nxt").classList.add("show");}
+renderQuiz();
+</script>
+</body>
+</html>

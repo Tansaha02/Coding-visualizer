@@ -9,45 +9,130 @@
 </head>
 <body class="dot-bg">
 <div id="nav"></div>
+
 <div class="page page-z">
 
-  <div style="margin-bottom:3.5rem">
-    <div style="font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem">— 1st Year Project &nbsp;·&nbsp; HTML · CSS · JS</div>
-    <h1>Learn Code<br><em>by Seeing It.</em></h1>
-    <p class="subtitle" style="margin-bottom:2rem">CodeViz is an interactive visualizer that makes programming concepts click — with live editors, step-by-step animations, and cross-language comparisons.</p>
-    <div class="stats">
-      <div class="stat-item"><span class="stat-num">8</span><span class="stat-label">Chapters</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Languages</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">Live Demos</span></div>
+  
+  <div style="margin-bottom:3.5rem;display:flex;align-items:flex-start;gap:2.5rem;flex-wrap:wrap">
+
+    
+    <div style="flex:1;min-width:260px">
+      
+      <h1>Learn Code<br><em>by Seeing It.</em></h1>
+      <p class="subtitle" style="margin-bottom:2rem">
+        CodeViz is an interactive visualizer that makes programming concepts click — with live editors,
+        step-by-step animations, and cross-language comparisons.
+      </p>
+      <div class="stats">
+        <div class="stat-item"><span class="stat-num">8</span><span class="stat-label">Chapters</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Languages</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">Live Demos</span></div>
+      </div>
     </div>
+
+    
+    <div style="display:flex;flex-direction:column;align-items:center;gap:.75rem;padding-top:.5rem">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg"
+        alt="JavaScript logo"
+        width="110"
+        style="border-radius:16px;background:rgba(249,199,79,.1);padding:18px"
+      />
+      <span style="font-family:var(--mono);font-size:.65rem;color:var(--muted);letter-spacing:.1em">JavaScript</span>
+    </div>
+
   </div>
 
+  
   <div class="section-label">All Chapters</div>
   <div class="chapter-grid" id="chapter-grid"></div>
-  <div class="section">
-    <div class="section-level">Languages Covered</div>
-    <div class="lang-row">
-      <div class="lang-card"><div class="lang-icon" style="background: rgba(249,199,79,0.12);color: var(--yellow);">JS</div><div><div class="lang-name">Javascript</div><div class="lang-role">Primary Language</div></div></div>
-      <div class="lang-card"><div class="lang-icon" style="background: rgba(128,180,249,0.12);color: var(--blue);">PY</div><div><div class="lang-name">Python</div><div class="lang-role">Syntax Comparision</div></div></div>
-      <div class="lang-card"><div class="lang-icon" style="background: rgba(240,113,103,0.12);color: var(--red);">JV</div><div><div class="lang-name">Java</div><div class="lang-role">Syntax Comparision</div></div></div>
-      <div class="lang-card"><div class="lang-icon" style="background: rgba(125,249,170,0.12);color: var(--accent);">TS</div><div><div class="lang-name">Typescript</div><div class="lang-role">Syntax Comparision</div></div></div>
-    </div>
-  </div>
-  
-  <div class="Section">
-    <div class="section-label">How to Use</div>
-    <div class="steps">
-      <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Pick A chapter</strong><span>Start from variables or jump to any topic</span></div></div>
-       <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Pick A chapter</strong><span>Start from variables or jump to any topic</span></div></div>
-        <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Pick A chapter</strong><span>Start from variables or jump to any topic</span></div></div>
-         <div class="step"><div class="step-num">01</div><div class="step-text"><strong>Pick A chapter</strong><span>Start from variables or jump to any topic</span></div></div>
-    </div>
-  </div>
-  <div id="footer"></div>
 
   
+  <div class="section">
+    <div class="section-label">Languages Covered</div>
+    <div class="lang-row">
+      <div class="lang-card">
+        <div class="lang-icon" style="background:rgba(249,199,79,.12);color:var(--yellow)">JS</div>
+        <div><div class="lang-name">JavaScript</div><div class="lang-role">Primary language</div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-icon" style="background:rgba(128,180,249,.12);color:var(--blue)">PY</div>
+        <div><div class="lang-name">Python</div><div class="lang-role">Syntax comparison</div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-icon" style="background:rgba(240,113,103,.12);color:var(--red)">JV</div>
+        <div><div class="lang-name">Java</div><div class="lang-role">Syntax comparison</div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-icon" style="background:rgba(125,249,170,.12);color:var(--accent)">TS</div>
+        <div><div class="lang-name">TypeScript</div><div class="lang-role">Syntax comparison</div></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-label">How to Use</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-text"><strong>Pick a chapter</strong><span>Start from Variables or jump to any topic.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-text"><strong>Read the concept cards</strong><span>Each page starts with a plain-English explanation before any code.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-text"><strong>Try the live demo</strong><span>Edit code, click buttons, watch the visualizer update in real time.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-text"><strong>Quiz yourself</strong><span>Every chapter ends with a quick quiz to confirm you got it.</span></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="section">
+    <div class="section-label">Learn More — External Resources</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem">
+
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener"
+         style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem;text-decoration:none;color:var(--text);transition:border-color .2s,transform .2s;display:block"
+         onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+        <div style="font-family:var(--mono);font-size:.68rem;color:var(--accent);margin-bottom:.4rem;letter-spacing:.08em">MDN WEB DOCS</div>
+        <div style="font-size:.9rem;font-weight:700;margin-bottom:.25rem">JavaScript Guide</div>
+        <div style="font-size:.75rem;color:var(--muted)">The official JS reference by Mozilla</div>
+      </a>
+
+      <a href="https://www.w3schools.com/js/" target="_blank" rel="noopener"
+         style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem;text-decoration:none;color:var(--text);transition:border-color .2s,transform .2s;display:block"
+         onmouseover="this.style.borderColor='var(--blue)';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+        <div style="font-family:var(--mono);font-size:.68rem;color:var(--blue);margin-bottom:.4rem;letter-spacing:.08em">W3SCHOOLS</div>
+        <div style="font-size:.9rem;font-weight:700;margin-bottom:.25rem">JS Tutorials</div>
+        <div style="font-size:.75rem;color:var(--muted)">Beginner-friendly examples and exercises</div>
+      </a>
+
+      <a href="https://github.com/" target="_blank" rel="noopener"
+         style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem;text-decoration:none;color:var(--text);transition:border-color .2s,transform .2s;display:block"
+         onmouseover="this.style.borderColor='var(--purple)';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+        <div style="font-family:var(--mono);font-size:.68rem;color:var(--purple);margin-bottom:.4rem;letter-spacing:.08em">GITHUB</div>
+        <div style="font-size:.9rem;font-weight:700;margin-bottom:.25rem">Source Code</div>
+        <div style="font-size:.75rem;color:var(--muted)">View and fork the CodeViz repository</div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<div id="footer"></div>
 <script src="components.js"></script>
 <script>
 const chapters = [
@@ -61,6 +146,23 @@ const chapters = [
   { num:"08", title:"Fetch API & JSON",       desc:"Request data from the web. Read and display JSON responses.",       href:"api.html",       accent:"#80b4f9", ready:true,  langs:["JS","PY"] },
 ];
 
+const grid = document.getElementById("chapter-grid");
+chapters.forEach(ch => {
+  const a = document.createElement("a");
+  a.href = ch.href;
+  a.className = "chapter-card";
+  a.style.setProperty("--card-accent", ch.accent);
+  a.innerHTML = `
+    <div class="card-num">Chapter ${ch.num}</div>
+    <div class="card-title">${ch.title}</div>
+    <div class="card-desc">${ch.desc}</div>
+    <div class="card-footer">
+      <div class="card-langs">${ch.langs.map(l=>`<span class="lang-pill">${l}</span>`).join("")}</div>
+      <span class="status-ready">● Ready</span>
+    </div>
+    <div class="card-arrow">→</div>`;
+  grid.appendChild(a);
+});
 </script>
 </body>
 </html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loops — CodeViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+
+    <div class="tag">Chapter 02</div>
+    <h1>Loops &amp; <em>Iteration</em></h1>
+    <p class="subtitle">Learn how loops let you repeat code automatically - and watch them run step by step.</p>
+
+    <div class="section">
+      <div class="section-label">01 - Types of loops</div>
+      <div class="tabs" id="type-tabs">
+        <div class="tab active" data-type="for">for loop</div>
+        <div class="tab active" data-type="while">while loop</div>
+        <div class="tab active" data-type="for...of">for ...of</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+          <div id="code-title">for loop</div>
+          <div style="color: var(--muted);font-size: 0.7rem;">Javascript</div>
+
+        </div>
+        <div class="two-col">
+          <div id="code-display" class="code-block" style="border-right: 1px solid var(--border);"></div>
+          <div id="explain-display" class="explain"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">02-Watch It Run</div>
+      <div class="card">
+        <div class="card-head">
+          <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+          <div>Step visualizer</div>
+          <div class="viz-controls">
+            <button class="btn btn-green" onclick="startViz()">> Run</button>
+            <button class="btn btn-outline" onclick="resetViz()">Reset</button>
+            <span class="speed-label">Speed:</span>
+            <select id="speed-select"><option value="800">Slow</option><option value="400" selected>Normal</option><option value="150" selected>Fast</option></select>
+          <span class="speed-label">Count to:</span>
+          <select id="count-select" onchange="resetViz()"><option value="5">5</option><option value="8" selected>8</option><option value="12">12</option></select>
+
+          
+        </div>
+        <div class="iter-grid" id="iter-grid"></div>
+        <div class="viz-log" id="viz-log">Press > Run to start the loop...</div>
+        </div>
+      </div>
+    </div>
+</div>
+<div id="footer"></div>
+<script src="components.js"></script>
+<script>
+const loopData = {
+  for: {
+    title:"for loop",
+    code:`<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i < <span class="num">5</span>; i++) {
+  console.log(<span class="str">"Step:"</span>, i);
+}`,
+    explain:`<strong style="color:var(--text)">How it works</strong><br><br>The <code style="font-family:var(--mono);color:var(--yellow)">for</code> loop has 3 parts:<br><br><b style="color:var(--accent)">Start</b> — runs once at the beginning<br><b style="color:var(--blue)">Condition</b> — checked before every step<br><b style="color:var(--yellow)">Update</b> — runs after every step<br><br>Best for: counting, index-based tasks.`
+  },
+  while: {
+    title:"while loop",
+    code:`<span class="kw">let</span> count = <span class="num">0</span>;
+
+<span class="kw">while</span> (count < <span class="num">5</span>) {
+  console.log(<span class="str">"count:"</span>, count);
+  count++;
+}`,
+    explain:`<strong style="color:var(--text)">How it works</strong><br><br>Checks the condition first.<br><br>If <b style="color:var(--accent)">true</b> → run the block<br>If <b style="color:var(--red)">false</b> → stop<br><br>⚠️ Always update the variable inside — otherwise infinite loop!`
+  },
+  forof: {
+    title:"for...of loop",
+    code:`<span class="kw">const</span> fruits = [<span class="str">"apple"</span>, <span class="str">"banana"</span>, <span class="str">"mango"</span>];
+
+<span class="kw">for</span> (<span class="kw">const</span> fruit <span class="kw">of</span> fruits) {
+  console.log(fruit);
+}`,
+    explain:`<strong style="color:var(--text)">How it works</strong><br><br><code style="font-family:var(--mono);color:var(--yellow)">for...of</code> goes through an array item by item.<br><br>Each round the current item is in <b style="color:var(--accent)">fruit</b>.<br><br>No index needed — great for reading lists cleanly!`
+  }
+};
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    const d = loopData[tab.dataset.type];
+    document.getElementById("code-title").textContent = d.title;
+    document.getElementById("code-display").innerHTML = d.code;
+    document.getElementById("explain-display").innerHTML = d.explain;
+  });
+});
+document.getElementById("code-display").innerHTML = loopData.for.code;
+document.getElementById("explain-display").innerHTML = loopData.for.explain;
+
+let vizTimer = null;
+function resetViz() {
+  clearInterval(vizTimer);
+  const count = parseInt(document.getElementById("count-select").value);
+  const g = document.getElementById("iter-grid");
+  g.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    const b = document.createElement("div");
+    b.className = "iter-box"; b.id = `box-${i}`; b.textContent = i;
+    g.appendChild(b);
+  }
+  document.getElementById("viz-log").innerHTML = "Press ▶ Run to start the loop…";
+}
+function startViz() {
+  resetViz();
+  const count = parseInt(document.getElementById("count-select").value);
+  const speed = parseInt(document.getElementById("speed-select").value);
+  let i = 0;
+  vizTimer = setInterval(() => {
+    if (i > 0) document.getElementById(`box-${i-1}`).className = "iter-box done";
+    if (i >= count) { document.getElementById("viz-log").innerHTML = `✅ Loop finished! Ran <span>${count}</span> times.`; clearInterval(vizTimer); return; }
+    document.getElementById(`box-${i}`).className = "iter-box active";
+    document.getElementById("viz-log").innerHTML = `🔄 Step <span>${i+1}</span> of ${count} — i = <span>${i}</span>`;
+    i++;
+  }, speed);
+}
+resetViz();
+
+const questions = [
+  { q:`How many times does <code>for (let i=0; i&lt;4; i++)</code> run?`, opts:["3","4","5","Infinite"], ans:1, exp:"i goes 0,1,2,3 then stops when i=4. That's 4 runs." },
+  { q:`Which loop is best for going through every item in an array?`, opts:["for","while","for...of","if"], ans:2, exp:"for...of gives you each item directly without needing an index." },
+  { q:`What happens if you forget to update the counter in a while loop?`, opts:["Runs 0 times","Error","Infinite loop","Skips to end"], ans:2, exp:"The condition never becomes false so the loop never stops." },
+  { q:`What does <code>i++</code> mean?`, opts:["Subtract 1","Add 1 to i","Multiply by 2","Reset to 0"], ans:1, exp:"i++ is shorthand for i = i + 1. It moves the counter forward." },
+];
+let qi=0, qs=0;
+function renderQuiz(){
+  if(qi>=questions.length){document.getElementById("quiz-area").innerHTML=`<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎉</div><div style="font-weight:700;margin:.5rem 0">Score: ${qs} / ${questions.length}</div><button class="next-btn show" onclick="qi=0;qs=0;renderQuiz()">Try Again</button></div>`;return;}
+  const q=questions[qi];
+  document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;
+  document.getElementById("quiz-area").innerHTML=`<div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<div class="option" onclick="pick(${i})">${o}</div>`).join("")}</div><div class="feedback" id="fb"></div><button class="next-btn" id="nxt" onclick="qi++;renderQuiz()">Next →</button>`;
+}
+function pick(i){const q=questions[qi];document.querySelectorAll(".option").forEach((el,j)=>{el.classList.add("off");if(j===q.ans)el.classList.add("correct");if(j===i&&i!==q.ans)el.classList.add("wrong");});const fb=document.getElementById("fb");if(i===q.ans){qs++;fb.className="feedback show ok";fb.textContent="✓ "+q.exp;}else{fb.className="feedback show no";fb.textContent="✗ "+q.exp;}document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("nxt").classList.add("show");}
+renderQuiz();
+</script>
+</body>
+</html>

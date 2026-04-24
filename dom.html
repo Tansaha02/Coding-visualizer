@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DOM — CodeViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+
+  <div class="tag">Chapter 04</div>
+  <h1>DOM <em>Manipulation</em></h1>
+  <p class="subtitle">The DOM is the live structure of your webpage. JavaScript can select, change, add, and remove any element.</p>
+
+  <div class="section">
+    <div class="section-label">01 — Key DOM Methods</div>
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>What it does</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>getElementById()</td><td>Select one element by its id</td><td>document.getElementById("title")</td></tr>
+            <tr><td>querySelector()</td><td>Select first match by CSS selector</td><td>document.querySelector(".card")</td></tr>
+            <tr><td>textContent</td><td>Get or set the text inside an element</td><td>el.textContent = "Hello"</td></tr>
+            <tr><td>style</td><td>Change CSS directly from JS</td><td>el.style.color = "red"</td></tr>
+            <tr><td>classList.add()</td><td>Add a CSS class to an element</td><td>el.classList.add("active")</td></tr>
+            <tr><td>createElement()</td><td>Create a brand new HTML element</td><td>document.createElement("p")</td></tr>
+            <tr><td>appendChild()</td><td>Add a child element inside another</td><td>parent.appendChild(newEl)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">02 — Live DOM Demo</div>
+    <div class="card">
+      <div class="card-head">
+        <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div>Manipulate the element below</div>
+      </div>
+      <div style="padding:1.2rem 1.4rem">
+        <div class="dom-controls">
+          <button class="btn btn-outline" onclick="changeText()">Change Text</button>
+          <button class="btn btn-outline" onclick="changeColor()">Change Color</button>
+          <button class="btn btn-outline" onclick="changeSize()">Change Size</button>
+          <button class="btn btn-outline" onclick="addEl()">Add Element</button>
+          <button class="btn btn-outline" onclick="resetDemo()">↺ Reset</button>
+        </div>
+        <div class="sandbox">
+          <div class="sandbox-label">id="demo-box"</div>
+          <div id="demo-box" style="font-size:1.05rem;font-weight:700;transition:all .3s">I am a DOM element. Try the buttons!</div>
+          <div style="margin-top:1rem;display:flex;gap:.5rem">
+            <input class="form-input" id="new-text" placeholder='Type text then click "Change Text"' style="font-size:.82rem;padding:.4rem .8rem"/>
+          </div>
+          <div id="added-els" style="margin-top:.75rem;display:flex;flex-direction:column;gap:.35rem"></div>
+        </div>
+        <div class="code-block" id="last-cmd" style="margin-top:1rem;border:1px solid var(--border);border-radius:8px;font-size:.78rem;color:var(--muted)">// Last command will appear here…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">03 — The DOM Tree</div>
+    <div class="card">
+      <div class="card-head">
+        <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div>HTML → DOM Tree</div>
+      </div>
+      <div class="tree">
+        <div><span class="tree-tag">&lt;html&gt;</span></div>
+        <div>&nbsp;&nbsp;├─ <span class="tree-tag">&lt;head&gt;</span></div>
+        <div>&nbsp;&nbsp;│&nbsp;&nbsp;└─ <span class="tree-tag">&lt;title&gt;</span> <span class="tree-text">"CodeViz"</span> <span class="tree-tag">&lt;/title&gt;</span></div>
+        <div>&nbsp;&nbsp;└─ <span class="tree-tag">&lt;body&gt;</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ <span class="tree-tag">&lt;h1</span> <span class="tree-attr">id="title"</span><span class="tree-tag">&gt;</span> <span class="tree-text">"Hello"</span> <span class="tree-tag">&lt;/h1&gt;</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ <span class="tree-tag">&lt;p</span> <span class="tree-attr">class="info"</span><span class="tree-tag">&gt;</span> <span class="tree-text">"World"</span> <span class="tree-tag">&lt;/p&gt;</span></div>
+      </div>
+      <div style="padding:0 1.4rem 1.2rem;font-size:.84rem;color:var(--muted);line-height:1.75">Every HTML element becomes a <strong style="color:var(--text)">node</strong> in this tree. JavaScript travels up and down to find and change any node.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">04 — Quick Quiz</div>
+    <div class="card">
+      <div class="card-head"><div>Test Yourself</div><div class="score-display" id="score-display">0 / 4</div></div>
+      <div class="quiz-pad" id="quiz-area"></div>
+    </div>
+  </div>
+
+</div>
+<div id="footer"></div>
+<script src="components.js"></script>
+<script>
+const colors = ["#f07167","#f9c74f","#7df9aa","#80b4f9","#a78bfa"];
+let ci=0, sizeOn=false, count=0;
+const cmd = document.getElementById("last-cmd");
+
+function changeText(){ const t=document.getElementById("new-text").value||"Hello from JavaScript!"; document.getElementById("demo-box").textContent=t; cmd.textContent=`document.getElementById("demo-box").textContent = "${t}";`; }
+function changeColor(){ const c=colors[ci++%colors.length]; document.getElementById("demo-box").style.color=c; cmd.textContent=`document.getElementById("demo-box").style.color = "${c}";`; }
+function changeSize(){ sizeOn=!sizeOn; document.getElementById("demo-box").style.fontSize=sizeOn?"1.7rem":"1.05rem"; cmd.textContent=`document.getElementById("demo-box").style.fontSize = "${sizeOn?"1.7rem":"1.05rem"}";`; }
+function addEl(){ count++; const p=document.createElement("p"); p.textContent=`New element #${count} added by JS!`; p.style.cssText="font-family:var(--mono);font-size:.8rem;color:var(--muted)"; document.getElementById("added-els").appendChild(p); cmd.textContent=`const p = document.createElement("p");\np.textContent = "New element #${count}";\nparent.appendChild(p);`; }
+function resetDemo(){ document.getElementById("demo-box").textContent="I am a DOM element. Try the buttons!"; document.getElementById("demo-box").style.color=""; document.getElementById("demo-box").style.fontSize=""; document.getElementById("added-els").innerHTML=""; document.getElementById("new-text").value=""; cmd.textContent="// Last command will appear here…"; ci=0;sizeOn=false;count=0; }
+
+const questions=[
+  {q:`Which method selects an element by its <code>id</code>?`, opts:["querySelector()","getElement()","getElementById()","selectById()"], ans:2, exp:"getElementById() is the most direct way to grab one element by its unique id."},
+  {q:`How do you change the text inside a &lt;p&gt; element?`, opts:["p.value='text'","p.textContent='text'","p.html='text'","p.innerText()"], ans:1, exp:"textContent lets you get or set plain text inside any element."},
+  {q:`What does <code>document.createElement('div')</code> do?`, opts:["Selects a div","Deletes a div","Creates a new div in memory","Styles a div"], ans:2, exp:"createElement creates a new element in memory — use appendChild() to add it to the page."},
+  {q:`What does DOM stand for?`, opts:["Data Object Model","Document Object Model","Design Object Module","Document Output Model"], ans:1, exp:"DOM = Document Object Model — the browser's tree representation of your HTML."},
+];
+let qi=0,qs=0;
+function renderQuiz(){if(qi>=questions.length){document.getElementById("quiz-area").innerHTML=`<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎉</div><div style="font-weight:700;margin:.5rem 0">Score: ${qs} / ${questions.length}</div><button class="next-btn show" onclick="qi=0;qs=0;renderQuiz()">Try Again</button></div>`;return;}const q=questions[qi];document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("quiz-area").innerHTML=`<div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<div class="option" onclick="pick(${i})">${o}</div>`).join("")}</div><div class="feedback" id="fb"></div><button class="next-btn" id="nxt" onclick="qi++;renderQuiz()">Next →</button>`;}
+function pick(i){const q=questions[qi];document.querySelectorAll(".option").forEach((el,j)=>{el.classList.add("off");if(j===q.ans)el.classList.add("correct");if(j===i&&i!==q.ans)el.classList.add("wrong");});const fb=document.getElementById("fb");if(i===q.ans){qs++;fb.className="feedback show ok";fb.textContent="✓ "+q.exp;}else{fb.className="feedback show no";fb.textContent="✗ "+q.exp;}document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("nxt").classList.add("show");}
+renderQuiz();
+</script>
+</body>
+</html>

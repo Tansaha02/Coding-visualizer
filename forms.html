@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form Validation — CodeViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+
+  <div class="tag">Chapter 07</div>
+  <h1>Form <em>Validation</em></h1>
+  <p class="subtitle">Check what the user types before accepting it. Validation keeps data clean and users informed.</p>
+
+  <div class="section">
+    <div class="section-label">01 — Live Validation Demo</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>Registration Form</div></div>
+      <div class="form-wrap" id="form-wrap">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" id="f-name" placeholder="At least 3 characters" oninput="validateName()"/>
+          <div class="form-hint" id="h-name"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" id="f-email" placeholder="example@email.com" oninput="validateEmail()"/>
+          <div class="form-hint" id="h-email"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" id="f-pass" type="password" placeholder="Min 8 characters" oninput="validatePass()"/>
+          <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+          <div class="form-hint" id="h-pass"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Age</label>
+          <input class="form-input" id="f-age" type="number" placeholder="Must be 18 or older" oninput="validateAge()"/>
+          <div class="form-hint" id="h-age"></div>
+        </div>
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()" disabled>Submit</button>
+      </div>
+      <div class="success-msg" id="success-msg">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">✅</div>
+        <div style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">All fields valid!</div>
+        <div style="color:var(--muted);font-size:.85rem">In a real app this data would be sent to a server.</div>
+        <button class="next-btn show" onclick="resetForm()" style="margin-top:1rem">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">02 — How Validation Works</div>
+    <div class="card">
+      <div class="code-block"><span class="kw">function</span> validateName() {
+  <span class="kw">const</span> name = document.getElementById(<span class="str">"name"</span>).value;
+
+  <span class="kw">if</span> (name.length < <span class="num">3</span>) {
+    showError(<span class="str">"Name must be at least 3 characters"</span>);
+    <span class="kw">return false</span>;
+  }
+  showSuccess(<span class="str">"✓ Looks good!"</span>);
+  <span class="kw">return true</span>;
+}
+<span class="kw">if</span> (!email.includes(<span class="str">"@"</span>)) {
+  showError(<span class="str">"Email must contain @"</span>);
+}</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">03 — Common Validation Rules</div>
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rule</th><th>How to Check in JS</th></tr></thead>
+          <tbody>
+            <tr><td>Not empty</td><td>value.length > 0</td></tr>
+            <tr><td>Min length</td><td>value.length >= 8</td></tr>
+            <tr><td>Contains @</td><td>value.includes("@")</td></tr>
+            <tr><td>Only numbers</td><td>!isNaN(value)</td></tr>
+            <tr><td>Min age</td><td>parseInt(value) >= 18</td></tr>
+            <tr><td>Passwords match</td><td>pass1.value === pass2.value</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">04 — Quick Quiz</div>
+    <div class="card">
+      <div class="card-head"><div>Test Yourself</div><div class="score-display" id="score-display">0 / 4</div></div>
+      <div class="quiz-pad" id="quiz-area"></div>
+    </div>
+  </div>
+
+</div>
+<div id="footer"></div>
+<script src="components.js"></script>
+<script>
+let valid={name:false,email:false,pass:false,age:false};
+function checkSubmit(){ document.getElementById("submit-btn").disabled=!Object.values(valid).every(Boolean); }
+function setField(id,hid,ok,msg){ const el=document.getElementById(id),h=document.getElementById(hid); el.className="form-input "+(ok?"valid":"invalid"); h.className="form-hint "+(ok?"hint-ok":"hint-err"); h.textContent=msg; }
+function validateName(){ const v=document.getElementById("f-name").value.trim(),ok=v.length>=3; setField("f-name","h-name",ok,ok?"✓ Name looks good":"✗ Must be at least 3 characters"); valid.name=ok; checkSubmit(); }
+function validateEmail(){ const v=document.getElementById("f-email").value.trim(),ok=v.includes("@")&&v.includes(".")&&v.length>5; setField("f-email","h-email",ok,ok?"✓ Valid email":"✗ Enter a valid email (must contain @)"); valid.email=ok; checkSubmit(); }
+function validatePass(){
+  const v=document.getElementById("f-pass").value,len=v.length;
+  const fill=document.getElementById("strength-fill");
+  let s=0; if(len>=4)s=25; if(len>=8)s=50; if(len>=8&&/[0-9]/.test(v))s=75; if(len>=8&&/[0-9]/.test(v)&&/[A-Z]/.test(v))s=100;
+  const cols=["","#f07167","#f9c74f","#80b4f9","#7df9aa"],labs=["","Weak","Fair","Strong","Very Strong"];
+  fill.style.width=s+"%"; fill.style.background=cols[s/25]||"";
+  const ok=len>=8; setField("f-pass","h-pass",ok,ok?`✓ ${labs[s/25]} password`:`✗ Min 8 characters`); valid.pass=ok; checkSubmit();
+}
+function validateAge(){ const v=parseInt(document.getElementById("f-age").value),ok=!isNaN(v)&&v>=18; setField("f-age","h-age",ok,ok?"✓ Age verified":"✗ Must be 18 or older"); valid.age=ok; checkSubmit(); }
+function submitForm(){ document.getElementById("form-wrap").style.display="none"; document.getElementById("success-msg").classList.add("show"); }
+function resetForm(){ document.getElementById("form-wrap").style.display="block"; document.getElementById("success-msg").classList.remove("show"); ["f-name","f-email","f-pass","f-age"].forEach(id=>{document.getElementById(id).value="";document.getElementById(id).className="form-input";}); ["h-name","h-email","h-pass","h-age"].forEach(id=>document.getElementById(id).textContent=""); document.getElementById("strength-fill").style.width="0"; valid={name:false,email:false,pass:false,age:false}; checkSubmit(); }
+
+const questions=[
+  {q:`How do you check if a text field is empty?`, opts:["value === null","value.length === 0","value === undefined","isEmpty(value)"], ans:1, exp:"Checking .length === 0 is the most reliable way."},
+  {q:`Which method checks if a string contains the @ symbol?`, opts:["value.has('@')","value.find('@')","value.includes('@')","value.contains('@')"], ans:2, exp:"String.includes() returns true if the substring is found anywhere."},
+  {q:`What does <code>parseInt("25")</code> return?`, opts:["'25'","25","NaN","Error"], ans:1, exp:"parseInt() converts a string to an integer number."},
+  {q:`Why validate on both frontend AND backend?`, opts:["No reason","Frontend gives instant feedback; backend is the real security","Backend is too slow","Frontend is more secure"], ans:1, exp:"Frontend validation is UX. Backend validation is security — JS can be bypassed by attackers."},
+];
+let qi=0,qs=0;
+function renderQuiz(){if(qi>=questions.length){document.getElementById("quiz-area").innerHTML=`<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎉</div><div style="font-weight:700;margin:.5rem 0">Score: ${qs} / ${questions.length}</div><button class="next-btn show" onclick="qi=0;qs=0;renderQuiz()">Try Again</button></div>`;return;}const q=questions[qi];document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("quiz-area").innerHTML=`<div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<div class="option" onclick="pick(${i})">${o}</div>`).join("")}</div><div class="feedback" id="fb"></div><button class="next-btn" id="nxt" onclick="qi++;renderQuiz()">Next →</button>`;}
+function pick(i){const q=questions[qi];document.querySelectorAll(".option").forEach((el,j)=>{el.classList.add("off");if(j===q.ans)el.classList.add("correct");if(j===i&&i!==q.ans)el.classList.add("wrong");});const fb=document.getElementById("fb");if(i===q.ans){qs++;fb.className="feedback show ok";fb.textContent="✓ "+q.exp;}else{fb.className="feedback show no";fb.textContent="✗ "+q.exp;}document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("nxt").classList.add("show");}
+renderQuiz();
+</script>
+</body>
+</html>

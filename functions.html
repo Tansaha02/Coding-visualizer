@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Functions — CodeViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+
+  <div class="tag">Chapter 03</div>
+  <h1>Functions &amp; <em>Scope</em></h1>
+  <p class="subtitle">Write reusable blocks of code. Understand what variables are visible where.</p>
+
+  <div class="section">
+    <div class="section-label">01 — Ways to Write a Function</div>
+    <div class="tabs" id="fn-tabs">
+      <div class="tab active" data-fn="decl">Declaration</div>
+      <div class="tab" data-fn="expr">Expression</div>
+      <div class="tab" data-fn="arrow">Arrow</div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div id="fn-title">Function Declaration</div>
+        <div style="color:var(--muted);font-size:.7rem">JavaScript</div>
+      </div>
+      <div class="two-col">
+        <div id="fn-code" class="code-block" style="border-right:1px solid var(--border)"></div>
+        <div id="fn-explain" class="explain"></div>
+      </div>
+    </div>
+  </div>
+
+<div class="section">
+<div class="section-label">02 - Live Function Demo</div>
+<div class="card">
+      <div class="card-head">
+        <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div>Try It -Calculator functions</div>
+      </div>
+      <div class="demo-wrap">
+        <div class="input-row">
+          <input class="demo-input" type="number" id="numA" value="10" placeholder="Num A"/>
+           <input class="demo-input" type="number" id="numB" value="10" placeholder="Num B"/>
+           <button class="btn vtn-green" onclick="runAdd()">add(a,b)</button>
+           <button class="btn btn-outline" onclick="runMul()">muliply(a,b)</button>
+           <button class="btn btn-outline" onclick="runMax()">max(a,b)</button> 
+           </div>
+           <div class="demo-result" id="demo-result">Result will appear here........</div>
+          </div>
+        </div>
+      </div>
+
+  <div class="section">
+    <div class="section-label">03 — Variable Scope Visualizer</div>
+    <div class="card">
+      <div class="card-head">
+        <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div>Global vs Local Scope</div>
+      </div>
+      <div class="scope-wrap">
+        <p class="scope-intro">Variables outside a function are <strong style="color:var(--text)">global</strong>. Variables inside are <strong style="color:var(--text)">local</strong> — only visible inside that function.</p>
+        <div class="scope-box" style="border-color:rgba(128,180,249,.4)">
+          <div class="scope-label" style="color:var(--blue)">Global Scope</div>
+          <div class="scope-vars">
+            <span class="var-chip" style="border-color:var(--blue);color:var(--blue)">appName = "CodeViz"</span>
+            <span class="var-chip" style="border-color:var(--blue);color:var(--blue)">version = 1</span>
+          </div>
+          <div class="scope-box" style="border-color:rgba(125,249,170,.4);margin-top:1rem">
+            <div class="scope-label" style="color:var(--accent)">Function — greet()</div>
+            <div class="scope-vars">
+              <span class="var-chip" style="border-color:var(--accent);color:var(--accent)">message = "Hello!"</span>
+              <span class="var-chip" style="border-color:var(--blue);color:var(--blue)">appName ✅ visible</span>
+            </div>
+          </div>
+          <div class="scope-box" style="border-color:rgba(249,199,79,.4);margin-top:.75rem">
+            <div class="scope-label" style="color:var(--yellow)">Function — calculate()</div>
+            <div class="scope-vars">
+              <span class="var-chip" style="border-color:var(--yellow);color:var(--yellow)">result = 42</span>
+              <span class="var-chip" style="border-color:var(--red);color:var(--red)">message ❌ not visible</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">04-Quick quiz</div>
+    <div class="card">
+      <div class="card-head"><div>Test Yourself</div><div class="score-display" id="score-display">0/4</div></div>
+      <div class="quiz-pad" id="quiz-area"></div>
+    </div>
+  </div>
+
+</div>
+<div id="footer"></div>
+<script src="components.js"></script>
+<script>
+const fnData = {
+  decl:{ title:"Function Declaration",
+    code:`<span class="kw">function</span> <span class="fn">greet</span>(name) {\n  <span class="kw">return</span> <span class="str">"Hello, "</span> + name + <span class="str">"!"</span>;\n}\nconsole.log(<span class="fn">greet</span>(<span class="str">"Alice"</span>));`,
+    explain:`<strong style="color:var(--text)">Function Declaration</strong><br><br>Most common way. Write <code style="font-family:var(--mono);color:var(--yellow)">function</code> then the name.<br><br><b style="color:var(--accent)">Parameters</b> are inputs (like <code style="font-family:var(--mono)">name</code>)<br><b style="color:var(--blue)">return</b> sends a value back<br><br>✅ Can be called before it's written (hoisting)`
+  },
+  expr:{ title:"Function Expression",
+    code:`<span class="kw">const</span> greet = <span class="kw">function</span>(name) {\n  <span class="kw">return</span> <span class="str">"Hello, "</span> + name + <span class="str">"!"</span>;\n};\nconsole.log(<span class="fn">greet</span>(<span class="str">"Bob"</span>));`,
+    explain:`<strong style="color:var(--text)">Function Expression</strong><br><br>Stored inside a <code style="font-family:var(--mono);color:var(--yellow)">const</code> variable.<br><br>❌ Cannot be called before it's defined<br>✅ Good for passing functions as arguments`
+  },
+  arrow:{ title:"Arrow Function",
+    code:`<span class="kw">const</span> greet = (name) => {\n  <span class="kw">return</span> <span class="str">"Hello, "</span> + name;\n};\n\n<span class="kw">const</span> add = (a, b) => a + b;\nconsole.log(<span class="fn">add</span>(<span class="num">3</span>, <span class="num">4</span>));`,
+    explain:`<strong style="color:var(--text)">Arrow Function</strong><br><br>Uses <code style="font-family:var(--mono);color:var(--yellow)">=></code> instead of the word function.<br><br>One-line version skips the <code style="font-family:var(--mono)">return</code> keyword.<br><br>✅ Most common in modern JavaScript`
+  }
+};
+
+document.querySelectorAll("#fn-tabs .tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#fn-tabs .tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    const d = fnData[tab.dataset.fn];
+    document.getElementById("fn-title").textContent = d.title;
+    document.getElementById("fn-code").innerHTML = d.code;
+    document.getElementById("fn-explain").innerHTML = d.explain;
+  });
+});
+document.getElementById("fn-code").innerHTML = fnData.decl.code;
+document.getElementById("fn-explain").innerHTML = fnData.decl.explain;
+
+function getVals(){ return [parseFloat(document.getElementById("numA").value)||0, parseFloat(document.getElementById("numB").value)||0]; }
+function show(label, val){ document.getElementById("demo-result").innerHTML = `<span style="color:var(--muted)">${label} →</span> <span style="font-weight:700">${val}</span>`; }
+function runAdd(){ const [a,b]=getVals(); show(`add(${a}, ${b})`, a+b); }
+function runMul(){ const [a,b]=getVals(); show(`multiply(${a}, ${b})`, a*b); }
+function runMax(){ const [a,b]=getVals(); show(`max(${a}, ${b})`, Math.max(a,b)); }
+
+const questions = [
+  { q:`What keyword sends a value back from a function?`, opts:["send","output","return","give"], ans:2, exp:"`return` sends a value back to wherever the function was called." },
+  { q:`What are the inputs to a function called?`, opts:["variables","parameters","returns","values"], ans:1, exp:"Parameters are the named inputs defined in the function. Arguments are the actual values passed when calling it." },
+  { q:`Can a function declaration be called before it's written?`, opts:["No","Yes — due to hoisting","Only with const","Only in strict mode"], ans:1, exp:"Function declarations are hoisted — JS reads them before running the code." },
+  { q:`What does <code>const double = x => x * 2; double(5)</code> return?`, opts:["5","25","10","Error"], ans:2, exp:"Arrow function returns x * 2 directly. 5 * 2 = 10." },
+];
+let qi=0, qs=0;
+function renderQuiz(){
+  if(qi>=questions.length){document.getElementById("quiz-area").innerHTML=`<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎉</div><div style="font-weight:700;margin:.5rem 0">Score: ${qs} / ${questions.length}</div><button class="next-btn show" onclick="qi=0;qs=0;renderQuiz()">Try Again</button></div>`;return;}
+  const q=questions[qi];
+  document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;
+  document.getElementById("quiz-area").innerHTML=`<div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<div class="option" onclick="pick(${i})">${o}</div>`).join("")}</div><div class="feedback" id="fb"></div><button class="next-btn" id="nxt" onclick="qi++;renderQuiz()">Next →</button>`;
+}
+function pick(i){const q=questions[qi];document.querySelectorAll(".option").forEach((el,j)=>{el.classList.add("off");if(j===q.ans)el.classList.add("correct");if(j===i&&i!==q.ans)el.classList.add("wrong");});const fb=document.getElementById("fb");if(i===q.ans){qs++;fb.className="feedback show ok";fb.textContent="✓ "+q.exp;}else{fb.className="feedback show no";fb.textContent="✗ "+q.exp;}document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("nxt").classList.add("show");}
+renderQuiz();
+</script>
+</body>
+</html>

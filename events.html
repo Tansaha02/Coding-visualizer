@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Events — CodeViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+
+  <div class="tag">Chapter 05</div>
+  <h1>Events &amp; <em>Listeners</em></h1>
+  <p class="subtitle">Events are things the user does — click, type, hover. JavaScript can listen and respond.</p>
+
+  <div class="section">
+    <div class="section-label">01 — Common Events</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>Event Types</div></div>
+      <div class="events-grid">
+        <div class="event-chip"><div class="event-name">click</div><div class="event-desc">User clicks the element</div></div>
+        <div class="event-chip"><div class="event-name">mouseover</div><div class="event-desc">Mouse moves over element</div></div>
+        <div class="event-chip"><div class="event-name">keydown</div><div class="event-desc">A key is pressed</div></div>
+        <div class="event-chip"><div class="event-name">keyup</div><div class="event-desc">A key is released</div></div>
+        <div class="event-chip"><div class="event-name">submit</div><div class="event-desc">A form is submitted</div></div>
+        <div class="event-chip"><div class="event-name">input</div><div class="event-desc">Value changes in a field</div></div>
+        <div class="event-chip"><div class="event-name">load</div><div class="event-desc">Page finishes loading</div></div>
+        <div class="event-chip"><div class="event-name">dblclick</div><div class="event-desc">User double-clicks</div></div>
+      </div>
+      <div class="code-block"><span class="kw">const</span> btn = document.<span class="fn">getElementById</span>(<span class="str">"myBtn"</span>);
+
+btn.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, <span class="kw">function</span>() {
+  console.log(<span class="str">"Button was clicked!"</span>);
+});</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">02 — Event Playground</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>Click · hover · double-click · right-click the box</div></div>
+      <div style="padding:1.2rem 1.4rem">
+        <div class="play-box" id="play-box">
+          <div class="play-main" id="play-main">🖱️ Interact with me</div>
+          <div class="play-hint">click · hover · double-click · right-click</div>
+        </div>
+        <div class="event-log" id="event-log"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">03 — Keyboard Event Tracker</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>Type anything below</div></div>
+      <div style="padding:1.2rem 1.4rem">
+        <input class="key-input" id="key-input" placeholder="Start typing to track key events…"/>
+        <div class="key-info">
+          <div class="key-card"><div class="key-label">Key</div><div class="key-val" id="k-key">—</div></div>
+          <div class="key-card"><div class="key-label">Code</div><div class="key-val" id="k-code">—</div></div>
+          <div class="key-card"><div class="key-label">Length</div><div class="key-val" id="k-len">0</div></div>
+          <div class="key-card"><div class="key-label">Event</div><div class="key-val" id="k-event">—</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">04 — Quick Quiz</div>
+    <div class="card">
+      <div class="card-head"><div>Test Yourself</div><div class="score-display" id="score-display">0 / 4</div></div>
+      <div class="quiz-pad" id="quiz-area"></div>
+    </div>
+  </div>
+
+</div>
+<div id="footer"></div>
+<script src="components.js"></script>
+<script>
+const box = document.getElementById("play-box");
+const logEl = document.getElementById("event-log");
+const eColors = { click:"var(--purple)", mouseover:"var(--accent)", mouseout:"var(--muted)", dblclick:"var(--yellow)", contextmenu:"var(--red)" };
+
+function logEvent(name, emoji) {
+  const e = document.createElement("div");
+  e.className = "log-entry";
+  e.style.borderLeftColor = eColors[name] || "var(--purple)";
+  e.innerHTML = `<span>${emoji} <strong>${name}</strong></span><span class="log-time">${new Date().toLocaleTimeString()}</span>`;
+  logEl.prepend(e);
+  if (logEl.children.length > 8) logEl.lastChild.remove();
+  document.getElementById("play-main").textContent = emoji + " " + name;
+}
+box.addEventListener("click",       () => logEvent("click","🖱️"));
+box.addEventListener("mouseover",   () => logEvent("mouseover","👆"));
+box.addEventListener("mouseout",    () => logEvent("mouseout","👋"));
+box.addEventListener("dblclick",    () => logEvent("dblclick","⚡"));
+box.addEventListener("contextmenu", e => { e.preventDefault(); logEvent("contextmenu","🔘"); });
+
+document.getElementById("key-input").addEventListener("keydown", e => {
+  document.getElementById("k-key").textContent   = e.key === " " ? "Space" : e.key;
+  document.getElementById("k-code").textContent  = e.code;
+  document.getElementById("k-event").textContent = "keydown";
+});
+document.getElementById("key-input").addEventListener("input", e => {
+  document.getElementById("k-len").textContent   = e.target.value.length;
+  document.getElementById("k-event").textContent = "input";
+});
+
+const questions=[
+  {q:`Which method attaches an event to an element?`, opts:["element.on()","element.listen()","element.addEventListener()","element.bind()"], ans:2, exp:"addEventListener() is the standard. It takes the event name and a callback function."},
+  {q:`What event fires every time the user types in a text box?`, opts:["change","keypress","input","type"], ans:2, exp:"The 'input' event fires every time the value changes. It's more reliable than keypress."},
+  {q:`What is a callback function in addEventListener?`, opts:["The HTML element","The event name","The function that runs when the event fires","The return value"], ans:2, exp:"The second argument is a callback — it runs every time that event happens."},
+  {q:`How do you stop the browser's right-click menu from appearing?`, opts:["event.stop()","event.preventDefault()","event.cancel()","return false"], ans:1, exp:"event.preventDefault() cancels the browser's default behaviour for that event."},
+];
+let qi=0,qs=0;
+function renderQuiz(){if(qi>=questions.length){document.getElementById("quiz-area").innerHTML=`<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎉</div><div style="font-weight:700;margin:.5rem 0">Score: ${qs} / ${questions.length}</div><button class="next-btn show" onclick="qi=0;qs=0;renderQuiz()">Try Again</button></div>`;return;}const q=questions[qi];document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("quiz-area").innerHTML=`<div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<div class="option" onclick="pick(${i})">${o}</div>`).join("")}</div><div class="feedback" id="fb"></div><button class="next-btn" id="nxt" onclick="qi++;renderQuiz()">Next →</button>`;}
+function pick(i){const q=questions[qi];document.querySelectorAll(".option").forEach((el,j)=>{el.classList.add("off");if(j===q.ans)el.classList.add("correct");if(j===i&&i!==q.ans)el.classList.add("wrong");});const fb=document.getElementById("fb");if(i===q.ans){qs++;fb.className="feedback show ok";fb.textContent="✓ "+q.exp;}else{fb.className="feedback show no";fb.textContent="✗ "+q.exp;}document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("nxt").classList.add("show");}
+renderQuiz();
+</script>
+</body>
+</html>

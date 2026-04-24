@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fetch API & JSON — CodeViz</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="nav"></div>
+<div class="page">
+
+  <div class="tag">Chapter 08</div>
+  <h1>Fetch API &amp; <em>JSON</em></h1>
+  <p class="subtitle">Request data from the internet using fetch(). JSON is the format APIs use to send data back.</p>
+
+  <div class="section">
+    <div class="section-label">01 — How fetch() Works</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>Request → Response → Use Data</div></div>
+      <div class="flow">
+        <div class="flow-box">Your JS Code</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box" style="border-color:var(--blue);color:var(--blue)">fetch(url)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">Server / API</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box" style="border-color:var(--yellow);color:var(--yellow)">JSON</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box" style="border-color:var(--accent);color:var(--accent)">Show on Page</div>
+      </div>
+      <div class="code-block" style="border-top:1px solid var(--border)"><span class="fn">fetch</span>(<span class="str">"https://api.example.com/users"</span>)
+  .then(<span class="kw">function</span>(response) {
+    <span class="kw">return</span> response.<span class="fn">json</span>();
+  })
+  .then(<span class="kw">function</span>(data) {
+    console.log(data);
+  })
+  .catch(<span class="kw">function</span>(error) {
+    console.log(<span class="str">"Error:"</span>, error);
+  });</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">02 — JSON Explorer</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>JSON ↔ JS Object</div></div>
+      <div style="padding:1.2rem 1.4rem">
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem">
+          <button class="btn btn-blue" onclick="showJSON()">Show JSON string</button>
+          <button class="btn btn-outline" onclick="showParsed()">Parse → JS Object</button>
+          <button class="btn btn-outline" onclick="showAccess()">Access a property</button>
+        </div>
+        <div class="json-box" id="json-box">Click a button above to explore JSON…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">03 — Simulated API Call</div>
+    <div class="card">
+      <div class="card-head"><div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div><div>Watch fetch() step by step</div></div>
+      <div class="fetch-wrap">
+        <div class="fetch-steps">
+          <div class="step-row" id="step1"><span>📡</span> Step 1: fetch() sends the request</div>
+          <div class="step-row" id="step2"><span>⏳</span> Step 2: Waiting for response…</div>
+          <div class="step-row" id="step3"><span>📦</span> Step 3: response.json() converts the data</div>
+          <div class="step-row" id="step4"><span>✅</span> Step 4: Data received — rendering cards</div>
+
+        </div>
+        <button class="btn btn-blue" id="fetch-btn" onclick="simulateFetch()">▶ Simulate fetch()</button>
+        <div class="user-cards" id="user-cards"></div>
+      </div>
+    </div>
+  </div>
+  
+    <div class="section">
+    <div class="section-label">04 — Quick Quiz</div>
+    <div class="card">
+      <div class="card-head"><div>Test Yourself</div><div class="score-display" id="score-display">0 / 4</div></div>
+      <div class="quiz-pad" id="quiz-area"></div>
+    </div>
+  </div>
+
+  <div class="complete-banner">
+    <div style="font-size:2rem;margin-bottom:.75rem">🎓</div>
+    <div style="font-size:1.2rem;font-weight:800;margin-bottom:.5rem">You've completed all 8 chapters!</div>
+    <div style="color:var(--muted);font-size:.88rem;line-height:1.7;max-width:420px;margin:0 auto">Variables, Loops, Functions, DOM, Events, Objects, Forms, and APIs. That's a full JavaScript foundation.</div>
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+
+
+</div>
+<div id="footer"></div>
+<script src="components.js"></script>
+<script>
+const sample = { name:"Alice", age:20, course:"CS", active:true };
+function showJSON(){ document.getElementById("json-box").innerHTML=`<span class="jv">'${JSON.stringify(sample)}'</span>`; }
+function showParsed(){ document.getElementById("json-box").innerHTML=`<span class="kw">const</span> obj = JSON.parse(jsonString);\n\n{\n  <span class="jk">name</span>: <span class="jv">"Alice"</span>,\n  <span class="jk">age</span>: <span class="jn">20</span>,\n  <span class="jk">course</span>: <span class="jv">"CS"</span>,\n  <span class="jk">active</span>: <span class="jn">true</span>\n}`; }
+function showAccess(){ document.getElementById("json-box").innerHTML=`obj.<span class="jk">name</span>   <span class="cmt">→ <span class="jv">"Alice"</span></span>\nobj.<span class="jk">age</span>    <span class="cmt">→ <span class="jn">20</span></span>\nobj.<span class="jk">course</span> <span class="cmt">→ <span class="jv">"CS"</span></span>\nobj.<span class="jk">active</span> <span class="cmt">→ <span class="jn">true</span></span>`; }
+
+const fakeUsers=[{name:"Alice Roy",email:"alice@cv.dev",role:"Student"},{name:"Bob Sen",email:"bob@cv.dev",role:"Student"},{name:"Carol Das",email:"carol@cv.dev",role:"Student"},{name:"Dev Bose",email:"dev@cv.dev",role:"Student"}];
+async function simulateFetch(){
+  const steps=["step1","step2","step3","step4"];
+  document.getElementById("user-cards").innerHTML="";
+  document.getElementById("fetch-btn").disabled=true;
+  steps.forEach(s=>document.getElementById(s).className="step-row");
+  for(let i=0;i<steps.length;i++){
+    await new Promise(r=>setTimeout(r,700));
+    if(i>0)document.getElementById(steps[i-1]).className="step-row done";
+    document.getElementById(steps[i]).className="step-row active";
+  }
+  await new Promise(r=>setTimeout(r,700));
+  document.getElementById(steps[3]).className="step-row done";
+  document.getElementById("user-cards").innerHTML=fakeUsers.map(u=>`<div class="user-card"><div class="u-name">${u.name}</div><div class="u-detail">${u.email}</div><div class="u-detail" style="color:var(--blue);margin-top:.2rem">${u.role}</div></div>`).join("");
+  document.getElementById("fetch-btn").disabled=false;
+}
+
+const questions=[
+  {q:`What does <code>response.json()</code> do?`, opts:["Sends JSON to server","Converts response into a JS object","Validates the JSON","Shows JSON on screen"], ans:1, exp:"response.json() reads the response body and parses the JSON string into a JS object."},
+  {q:`What format do most APIs use to send data?`, opts:["HTML","XML","CSV","JSON"], ans:3, exp:"JSON (JavaScript Object Notation) is the standard — lightweight and easy for JS to parse."},
+  {q:`What does <code>.catch()</code> do in a fetch chain?`, opts:["Fetches data","Converts response","Handles errors if the request fails","Sends POST"], ans:2, exp:".catch() runs if anything goes wrong — no internet, 404 errors, etc."},
+  {q:`What does API stand for?`, opts:["App Programming Interface","Application Programming Interface","Application Program Input","App Protocol Interface"], ans:1, exp:"API = Application Programming Interface — a URL you request to get or send data from a server."},
+];
+let qi=0,qs=0;
+function renderQuiz(){if(qi>=questions.length){document.getElementById("quiz-area").innerHTML=`<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎉</div><div style="font-weight:700;margin:.5rem 0">Score: ${qs} / ${questions.length}</div><button class="next-btn show" onclick="qi=0;qs=0;renderQuiz()">Try Again</button></div>`;return;}const q=questions[qi];document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("quiz-area").innerHTML=`<div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<div class="option" onclick="pick(${i})">${o}</div>`).join("")}</div><div class="feedback" id="fb"></div><button class="next-btn" id="nxt" onclick="qi++;renderQuiz()">Next →</button>`;}
+function pick(i){const q=questions[qi];document.querySelectorAll(".option").forEach((el,j)=>{el.classList.add("off");if(j===q.ans)el.classList.add("correct");if(j===i&&i!==q.ans)el.classList.add("wrong");});const fb=document.getElementById("fb");if(i===q.ans){qs++;fb.className="feedback show ok";fb.textContent="✓ "+q.exp;}else{fb.className="feedback show no";fb.textContent="✗ "+q.exp;}document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;document.getElementById("nxt").classList.add("show");}
+renderQuiz();
+</script>
+</body>
+</html>

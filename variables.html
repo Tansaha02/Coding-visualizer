@@ -3,74 +3,220 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Variables - CodeViz</title>
+  <title>Variables — CodeViz</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <div id="nav"></div>
-    <div class="page">
-        <div class="tag">Chapter 01</div>
-        <h1>Variables &amp; <em>Data types</em></h1>
-        <p class="subtitle">Understand How javascript stores data, the difference between var/let/const, and how types work</p>
+<div id="nav"></div>
+<div class="page">
 
+  <div class="tag">Chapter 01</div>
+  <h1>Variables &amp; <em>Data Types</em></h1>
+  <p class="subtitle">Understand how JavaScript stores data, the difference between var/let/const, and how types work.</p>
 
-        <div class="section">
-            <div class="section-label">01 - pick a Concept</div>
-            <div class="concept-grid" id="concept-cards"></div>
+  <div class="section">
+    <div class="section-label">01 — Pick a Concept</div>
+    <div class="concept-grid" id="concept-cards"></div>
+  </div>
 
-            <div class="section">
-                <div class="section-label">02 -Live Code Editor</div>
-                <div class="card">
-                    <div class="card-head">
-                        <div class="dots"><span class="d-r"><span class="d-y"></span><span class="d-g"></span></div>
-                        <div>script.js</div>
-                        <div style="color:var(--muted); font-size: 7 rem;">Javascript</div>
-                    </div>
-                    <div class="editor-wrap">
-                        <div class="editor-pane">
-                            <textarea id="code-editor" spellcheck="false">let name = "Alice";
+  <div class="section">
+    <div class="section-label">02 — Live Code Editor</div>
+    <div class="card">
+      <div class="card-head">
+        <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div>script.js</div>
+        <div style="color:var(--muted);font-size:.7rem">JavaScript</div>
+      </div>
+      <div class="editor-wrap">
+        <div class="editor-pane">
+          <textarea id="code-editor" spellcheck="false">let name = "Alice";
 let age = 20;
-let isstudent = true;
+let isStudent = true;
 let score;
+
 console.log(name);
 console.log(age);
 console.log(isStudent);
 console.log(score);
 console.log(typeof name);
-console.log(type of age);
-
-
-                            </textarea>
-                        </div>
-                        <div class="output-pane">
-                            <div class="output-label">> Output</div>
-                            <div id="output-display" style="min-height:160px"><span style="color: var(--muted); font-family: var(--mono);font-size: 8 rem;">Press Run...</span></div>
-                        </div>
-                    </div>
-                    <div style="padding:0.75rem 1.2rem 1.2rem">
-                        <button class="btn btn-green" onclick="runCode()">>Run Code</button>
-                    </div>
-                </div>
-            </div>
-            <div class="section">
-                <div class="section-label">03-Memory Visualizer</div>
-                <div class="card">
-                    <div class="card-head">
-                        <div class="dots"><span class="d-r"><span class="d-y"></span><span class="d-g"></span></div>
-                        <div>Variables stack</div>
-                        <button class="btn btn-outline" onclick="runCode()" style="padding: 0.2 rem 0.6 rem; font-size: 0.7rem;">Refresh</button>
-                    </div>
-                    <div class="memory-grid" id="memory-grid">
-                        <span style="color: var(--muted); font-family: var(--mono); font-size: 0.8rem; padding: 0.5rem;">Run code to see variables</span>
-                    </div>
-                </div>
-            </div>
-
-            
+console.log(typeof age);</textarea>
         </div>
+        <div class="output-pane">
+          <div class="output-label">▶ Output</div>
+          <div id="output-display" style="min-height:160px"><span style="color:var(--muted);font-family:var(--mono);font-size:.8rem">Press Run…</span></div>
+        </div>
+      </div>
+      <div style="padding:.75rem 1.2rem 1.2rem">
+        <button class="btn btn-green" onclick="runCode()">▶ Run Code</button>
+      </div>
     </div>
-    <div id="footer"></div>
-    <script src="components.js"></script>
+  </div>
+
+  <div class="section">
+    <div class="section-label">03 — Memory Visualizer</div>
+    <div class="card">
+      <div class="card-head">
+        <div class="dots"><span class="d-r"></span><span class="d-y"></span><span class="d-g"></span></div>
+        <div>Variable Stack</div>
+        <button class="btn btn-outline" onclick="runCode()" style="padding:.2rem .6rem;font-size:.7rem">Refresh</button>
+      </div>
+      <div class="memory-grid" id="memory-grid">
+        <span style="color:var(--muted);font-family:var(--mono);font-size:.8rem;padding:.5rem">Run code to see variables…</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">04 — Cross-Language Syntax</div>
+    <div class="card">
+      <div class="lang-tabs" id="lang-tabs">
+        <button class="lang-tab active" data-lang="js">JavaScript</button>
+        <button class="lang-tab" data-lang="py">Python</button>
+        <button class="lang-tab" data-lang="java">Java</button>
+        <button class="lang-tab" data-lang="ts">TypeScript</button>
+      </div>
+      <div id="lang-js"   class="lang-content active"></div>
+      <div id="lang-py"   class="lang-content"></div>
+      <div id="lang-java" class="lang-content"></div>
+      <div id="lang-ts"   class="lang-content"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">05 — Quick Quiz</div>
+    <div class="card">
+      <div class="card-head"><div>Test Yourself</div><div class="score-display" id="score-display">0 / 5</div></div>
+      <div class="quiz-pad" id="quiz-area"></div>
+    </div>
+  </div>
+
+</div>
+<div id="footer"></div>
+<script src="components.js"></script>
+<script>
+const concepts = [
+  { type:"keyword", color:"var(--accent)",  name:"let",          desc:"Block-scoped variable. Can be reassigned." },
+  { type:"keyword", color:"var(--blue)",    name:"const",        desc:"Block-scoped constant. Cannot be reassigned." },
+  { type:"keyword", color:"var(--red)",     name:"var",          desc:"Function-scoped (old way). Avoid in modern JS." },
+  { type:"type",    color:"var(--yellow)",  name:"String",       desc:'Text data — "hello", \'world\'.' },
+  { type:"type",    color:"var(--blue)",    name:"Number",       desc:"Integers & decimals — 42, 3.14, -7." },
+  { type:"type",    color:"var(--red)",     name:"Boolean",      desc:"true or false only." },
+  { type:"type",    color:"var(--purple)",  name:"Undefined",    desc:"Declared but not yet assigned a value." },
+  { type:"type",    color:"var(--accent)",  name:"Object/Array", desc:"Collections — key-value pairs or ordered lists." },
+];
+
+const snippets = {
+  "let":         `let x = 10;\nlet name = "Alice";\nx = 20;\nconsole.log(x);\nconsole.log(name);`,
+  "const":       `const PI = 3.14;\nconst app = "CodeViz";\nconsole.log(PI);\nconsole.log(app);`,
+  "var":         `var old = "avoid me";\nvar old = "redeclared";\nconsole.log(old);\nconsole.log(typeof old);`,
+  "String":      `let s1 = "Hello";\nlet s2 = 'World';\nconsole.log(s1 + " " + s2);\nconsole.log(typeof s1);\nconsole.log(s1.length);`,
+  "Number":      `let n1 = 42;\nlet n2 = 3.14;\nconsole.log(n1 + n2);\nconsole.log(typeof n1);\nconsole.log(isNaN("abc"));`,
+  "Boolean":     `let t = true;\nlet f = false;\nconsole.log(typeof t);\nconsole.log(t && f);\nconsole.log(t || f);`,
+  "Undefined":   `let x;\nconsole.log(x);\nconsole.log(typeof x);\nx = 5;\nconsole.log(x);`,
+  "Object/Array":`let obj = { name:"Alice", age:20 };\nlet arr = [1, 2, 3];\nconsole.log(obj.name);\nconsole.log(arr[0]);\nconsole.log(typeof obj);`,
+};
+
+const langSnippets = {
+  js:   `<span class="kw">let</span>   name   = <span class="str">"Alice"</span>\n<span class="kw">const</span> PI     = <span class="num">3.14</span>\n<span class="kw">let</span>   active = <span class="kw">true</span>\n<span class="kw">let</span>   score;\nconsole.log(<span class="kw">typeof</span> name);`,
+  py:   `name   = <span class="str">"Alice"</span>\nPI     = <span class="num">3.14</span>\nactive = <span class="kw">True</span>\nscore  = <span class="kw">None</span>\nprint(type(name))`,
+  java: `<span class="kw">String</span>  name   = <span class="str">"Alice"</span>;\n<span class="kw">double</span>  pi     = <span class="num">3.14</span>;\n<span class="kw">boolean</span> active = <span class="kw">true</span>;\n<span class="kw">final double</span> PI = <span class="num">3.14159</span>;\nSystem.out.println(name);`,
+  ts:   `<span class="kw">let</span>   name   : <span class="kw">string</span>  = <span class="str">"Alice"</span>;\n<span class="kw">const</span> PI     : <span class="kw">number</span>  = <span class="num">3.14</span>;\n<span class="kw">let</span>   active : <span class="kw">boolean</span> = <span class="kw">true</span>;`,
+};
+
+const grid = document.getElementById("concept-cards");
+concepts.forEach(c => {
+  const d = document.createElement("div");
+  d.className = "concept-card";
+  d.style.setProperty("--card-color", c.color);
+  d.innerHTML = `<div class="concept-type">${c.type}</div><div class="concept-name">${c.name}</div><div class="concept-desc">${c.desc}</div>`;
+  d.onclick = () => {
+    document.querySelectorAll(".concept-card").forEach(el => el.classList.remove("active"));
+    d.classList.add("active");
+    document.getElementById("code-editor").value = snippets[c.name] || "";
+    runCode();
+  };
+  grid.appendChild(d);
+});
+
+
+function runCode() {
+  const code = document.getElementById("code-editor").value;
+  const out = document.getElementById("output-display");
+  const logs = [];
+  const fc = { log: (...a) => logs.push(a.map(smartStr)) };
+  try {
+    new Function("console", code)(fc);
+    out.innerHTML = logs.map(vals => {
+      const raw = vals.join(" ");
+      const t = inferType(raw);
+      const col = typeColor(t);
+      return `<div class="out-line"><span class="type-badge" style="background:${col}22;color:${col}">${t}</span><span style="color:${col}">${raw}</span></div>`;
+    }).join("") || `<span style="color:var(--muted);font-family:var(--mono);font-size:.8rem">No output.</span>`;
+  } catch(e) {
+    out.innerHTML = `<span style="color:var(--red);font-family:var(--mono);font-size:.8rem">✖ ${e.message}</span>`;
+  }
+  updateMemory(code);
+}
+
+function smartStr(v){ if(v===undefined)return"undefined"; if(v===null)return"null"; try{return JSON.stringify(v);}catch{return String(v);} }
+function inferType(v){ if(v==="undefined")return"undefined"; if(v==="true"||v==="false")return"boolean"; if(!isNaN(v)&&v!=="")return"number"; if(v.startsWith('"')||v.startsWith("'"))return"string"; return"string"; }
+function typeColor(t){ return({string:"var(--yellow)",number:"var(--blue)",boolean:"var(--red)",undefined:"var(--purple)"}[t]||"var(--text)"); }
+
+function updateMemory(code) {
+  const grid = document.getElementById("memory-grid");
+  const vars = [];
+  code.split("\n").forEach(line => {
+    const m = line.match(/^\s*(let|const|var)\s+(\w+)\s*=\s*(.+?);?\s*(?:\/\/.*)?$/);
+    if (!m) return;
+    let val; try { val = eval(m[3]); } catch { val = m[3].trim(); }
+    vars.push({ keyword:m[1], name:m[2], val });
+  });
+  if (!vars.length) { grid.innerHTML = `<span style="color:var(--muted);font-family:var(--mono);font-size:.8rem;padding:.5rem">No variables detected…</span>`; return; }
+  const addrs = ["0x1a4c","0x1a50","0x1a58","0x1a60","0x1a68","0x1a70"];
+  const kCol = { let:"var(--accent)", const:"var(--blue)", var:"var(--red)" };
+  grid.innerHTML = vars.map((v,i) => {
+    const t = v.val===undefined?"undefined":Array.isArray(v.val)?"array":typeof v.val;
+    const col = typeColor(t);
+    return `<div class="mem-cell" style="border-color:${col}44">
+      <div class="mem-addr">${addrs[i]||"0x???"}</div>
+      <div class="mem-name"><span style="color:${kCol[v.keyword]};font-size:.68rem">${v.keyword}</span> ${v.name}</div>
+      <div class="mem-value" style="color:${col}">${smartStr(v.val)}</div>
+      <div class="mem-type" style="color:${col}">${t}</div>
+    </div>`;
+  }).join("");
+}
+
+
+Object.entries(langSnippets).forEach(([lang, html]) => {
+  document.getElementById(`lang-${lang}`).innerHTML = `<pre>${html}</pre>`;
+});
+document.querySelectorAll(".lang-tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".lang-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".lang-content").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(`lang-${btn.dataset.lang}`).classList.add("active");
+  });
+});
+
+
+const questions = [
+  { q:`What does <code>typeof undefined</code> return?`, opts:['"null"','"undefined"','"void"','Error'], ans:1, exp:'typeof on an unassigned variable returns the string "undefined".' },
+  { q:`Which keyword creates a constant?`, opts:["var","let","const","fixed"], ans:2, exp:'const declares a binding that cannot be reassigned after creation.' },
+  { q:`What does <code>typeof 42</code> return?`, opts:['"integer"','"int"','"number"','"float"'], ans:2, exp:'JS has only one numeric type. typeof always returns "number".' },
+  { q:`Which is NOT a primitive type in JavaScript?`, opts:["string","boolean","array","number"], ans:2, exp:'Arrays are objects in JS — typeof [] returns "object".' },
+  { q:`Python equivalent of JS <code>undefined</code>?`, opts:["void","null","None","NaN"], ans:2, exp:'Python uses None to represent no value. Java uses null.' },
+];
+let qi=0, qs=0;
+function renderQuiz(){
+  if(qi>=questions.length){ document.getElementById("quiz-area").innerHTML=`<div style="text-align:center;padding:1rem"><div style="font-size:2rem">🎉</div><div style="font-weight:700;margin:.5rem 0">Score: ${qs} / ${questions.length}</div><button class="next-btn show" onclick="qi=0;qs=0;renderQuiz()">Try Again</button></div>`; return; }
+  const q=questions[qi];
+  document.getElementById("score-display").textContent=`${qs} / ${questions.length}`;
+  document.getElementById("quiz-area").innerHTML=`<div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<div class="option" onclick="pick(${i})">${o}</div>`).join("")}</div><div class="feedback" id="fb"></div><button class="next-btn" id="nxt" onclick="qi++;renderQuiz()">Next →</button>`;
+}
+function pick(i){ const q=questions[qi]; document.querySelectorAll(".option").forEach((el,j)=>{el.classList.add("off");if(j===q.ans)el.classList.add("correct");if(j===i&&i!==q.ans)el.classList.add("wrong");}); const fb=document.getElementById("fb"); if(i===q.ans){qs++;fb.className="feedback show ok";fb.textContent="✓ "+q.exp;}else{fb.className="feedback show no";fb.textContent="✗ "+q.exp;} document.getElementById("score-display").textContent=`${qs} / ${questions.length}`; document.getElementById("nxt").classList.add("show"); }
+renderQuiz();
+</script>
 </body>
 </html>
